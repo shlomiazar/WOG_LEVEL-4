@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+        stages {
+            stage('git checkout') {
+                steps {
+                    git branch: 'master',
+                    credentialsId: 'shlomiazar',
+                    url: 'https://github.com/shlomiazar/WOG_LEVEL-4.git'
+                }
+            }
+
+            stage('building image ') {
+                steps {
+                    sh 'sudo docker build -t Desktop/WoG_level4 .'
+                }
+            }
+
+            stage('Run docker image') {
+                steps {
+                    sh 'docker run --name docker_py_games -d -t -p 8777:80 WoG_level4'
+                }
+            }
+
+            stage ('Testing') {
+                steps {
+                    sh 'docker exec -t -d docker_py_games python /MainScores.py'
+                    sh 'docker exec -t -d docker_py_games python /tests/e2e.py'
+                   }
+            }
+
+            stage ('stop and delete') {
+                steps{
+                    sh 'docker stop docker_py_games'
+                    sh 'sudo docker rm docker_py_games'
+                }
+            }
+
+            stage('Push image to dockerhub') {
+                 steps{
+                      sh 'docker push Desktop/WoG_level4'
+                 }
+            }
+    }
+}
