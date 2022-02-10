@@ -1,8 +1,6 @@
 import random
 
 
-
-
 def guess(diff):
     x = random.randint(1, diff)
     guess = int(input(f"please enter a number from 1 to {diff}: "))
@@ -12,5 +10,3 @@ def guess(diff):
     else:
         print("you lost")
         return False
-
-

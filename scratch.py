@@ -8,11 +8,10 @@ def getCurrencyRate():
     respones = respones["data"]["ILS"]
     return respones
 
+
 def get_money_interval(diff):
     rand = random.randint(1, 100)
     print(f"Please guess the right amount in ILS of {rand}")
     t = rand * getCurrencyRate()
     interval = (t - (5 - diff), t + (5 - diff))
     return interval
-
-

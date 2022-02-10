@@ -18,7 +18,8 @@ def load_game():
 
     if int(x) == 1:
         print(
-            "you have chosen: Memory Game - a sequence of numbers will appear for 1 second and you have to guess it back")
+            "you have chosen: Memory Game - a sequence of numbers will appear for 1 second and you have to guess it "
+            "back")
         if MemoryGame.m_game(difficulty):
             Score.add_score(difficulty)
         else:
@@ -56,6 +57,7 @@ def difficulty_number():
 
 
     elif int(y) == 3:
+
         print("you have chosen: difficulty number 3")
 
     elif int(y) == 4:
